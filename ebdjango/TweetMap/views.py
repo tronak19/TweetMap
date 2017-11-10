@@ -1,7 +1,6 @@
 from django.conf import settings
-from django.http import HttpResponseRedirect, HttpResponse, JsonResponse
-from django.shortcuts import get_object_or_404, render
-from django.urls import reverse
+from django.http import JsonResponse
+from django.shortcuts import render
 from elasticsearch import Elasticsearch, RequestsHttpConnection
 from multiprocessing import Process
 from requests_aws4auth import AWS4Auth
@@ -10,10 +9,10 @@ import math
 import time
 import tweepy
 
-consumer_key =  'QvlNGKVPodDeDRIsJW4fEjd2H'
-consumer_secret = 'QfKC7Xqb9GFT2X1zFFUg7zsRcC0bGsIqOFmP1yK890Y5YBBzrV'
-access_token = '119028101-6DFJlu1MkQsxzfOj5Iy3EO4GFiYjYDYvI3CVHKd8'
-access_token_secret = 'uzoZir60wbJEE318HV0G9GupMk39hePCZsKlw4Wru7I1H'
+consumer_key =  ''
+consumer_secret = ''
+access_token = ''
+access_token_secret = ''
 
 aws_access_key_id = ''
 aws_secret_access_key = ''
@@ -41,8 +40,8 @@ class StreamListener(tweepy.StreamListener):
 		self.count = settings.COUNT
 
 	def on_data(self, tweet):
-		while True:
-		# while self.count<=1000:
+		# while True:
+		while self.count<=1000:
 			res = es.index(index="tweet-index", doc_type='tweet', id=self.count, body=tweet)
 			self.count+=1
 			return True
