@@ -6,7 +6,6 @@ from multiprocessing import Process
 from requests_aws4auth import AWS4Auth
 import json
 import math
-import time
 import tweepy
 
 consumer_key =  ''
